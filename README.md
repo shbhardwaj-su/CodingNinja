@@ -15,3 +15,7 @@ python3 manage.py runserver 8000
 # Screenshot
 
 ![alt tag](https://github.com/sucide/CodingNinja/blob/master/Screenshot%20from%202017-06-15%2020-03-13.png)
+
+# Features to be added
+
+Task Scheduling, Multiple languages, Sharing Url, Submissions Page.
