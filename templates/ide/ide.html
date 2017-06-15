@@ -1,0 +1,228 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/ide.css" %}"/>
+    <div class="page"  style="padding-right: 0; padding-left: 0;">
+        <div class="ide col-md-12">
+
+            <div class="col-md-6">
+            {#    Row-1 (Top-to-editor)#}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="Top-to-editor">
+                            <div class="lang col-xs-6 col-md-4">
+                                <select class="form-control" name="lang" id="editor-lang">
+                                        <option value="C" >C(gcc 4.8.1)</option>
+                                        <option value="CPP" >C++(g++ 4.8.1) </option>
+                                        <option value="CPP11" >C++11 </option>
+                                        <option value="CLOJURE" >Clojure (clojure 1.4.0)</option>
+                                        <option value="JAVA" >Java(openjdk 1.7.0_09)</option>
+                                        <option value="JAVASCRIPT" >JavaScript(Rhino 1.7)</option>
+                                        <option value="HASKELL" >Haskell(ghc 7.4.1)</option>
+                                        <option value="PERL" >Perl(perl 5.14.2)</option>
+                                        <option value="PHP" >PHP(php 5.3.10)</option>
+                                        <option value="PYTHON" >Python(python 2.7.3)</option>
+                                        <option value="RUBY" >Ruby(ruby 2.1.1)</option>
+                                </select>
+                            </div>
+                                <div class="pull-right col-xs-5 col-md-4">
+                                    <div class="theme">
+                                        <select class="form-control" name="theme" id="editor-theme">
+                                            <option value="terminal">Terminal</option>
+                                            <option value="solarized_dark">Solarized Dark</option>
+                                            <option value="twilight">Twilight</option>
+                                            <option value="chrome">Chrome</option>
+                                            <option value="clouds">Clouds</option>
+                                            <option value="clouds_midnight">Clouds Midnight</option>
+                                            <option value="cobalt">Cobalt</option>
+                                            <option value="crimson_editor">Crimson Editor</option>
+                                            <option value="dawn">Dawn</option>
+                                            <option value="eclipse">Eclipse</option>
+                                            <option value="idle_fingers">Idle Fingers</option>
+                                            <option value="kr_theme">Kr Theme</option>
+                                            <option value="merbivore">Merbivore</option>
+                                            <option value="merbivore_soft">Merbivore Soft</option>
+                                            <option value="mono_industrial">Mono Industrial</option>
+                                            <option value="monokai">Monokai</option>
+                                            <option value="pastel_on_dark">Pastel On Dark</option>
+                                            <option value="textmate">TextMate</option>
+                                            <option value="tomorrow">Tomorrow</option>
+                                            <option value="vibrant_ink">Vibrant Ink</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                     </div>
+                </div>
+            {#    Row-2 (editor)#}
+                <div class="row">
+                   <div class="col-md-12">
+                       <pre id="editor"></pre>
+                       <div id="bottom-to-editor" class="pull-right">
+                       </div>
+                   </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                    {#    Row-3 (checkbox - compile - run) #}
+                <div class="row" id="checkbox">
+                    <div class="col-md-12 ">
+                        <input type="checkbox" id="custom-input-checkbox">
+                        Custom input?
+                    </div>
+                </div>
+
+            {#    Row-4 (textarea) #}
+                <div class="custom-input-container">
+                    <textarea rows="5" class="nice-textarea" placeholder="Write your Inputs to program" id="custom-input-textbox"></textarea>
+                </div>
+
+
+            {#  Row-5 if compilation successfully  #}
+                <div class="compile-done" id="compile-success">
+                    <div class="output-status" >
+                        <p><strong>Output</strong></p>
+                        <hr>
+                        <pre id="output-success-pre"></pre>
+                    </div>
+                    <div class="input-staus" >
+                        <p><strong>Input</strong></p>
+                        <hr>
+                        <pre id="input-success-pre"></pre>
+                    </div>
+                    <div class="additional-success-details">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <p><strong>Run Status</strong></p>
+                            </div>
+                            <div class="col-xs-3">
+                                <p><strong>Time (sec)</strong></p>
+                            </div>
+                            <div class="col-xs-3">
+                                <p><strong>Memory (KB)</strong></p>
+                            </div>
+                            <div class="col-xs-3">
+                                 <p><strong>Web-Link (share)</strong></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p id="compile-success-status"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="compile-success-time"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="compile-success-memory"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="share-link"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {#  Row-6 if compilation failed  #}
+                <div class="compile-not-done" id="compile-failed">
+                    <div class="compile-status">
+                        <p><strong>Compilation Log</strong></p>
+                        <hr>
+                        <pre id="compile-failed-pre" style="background-color: lightcoral"></pre>
+                    </div>
+                    <div class="output-status" >
+                        <p><strong>Output</strong></p>
+                        <hr>
+                        <pre id="output-failed-pre">Standard input is empty</pre>
+                    </div>
+                    <div class="input-panel" >
+                        <p><strong>Input</strong></p>
+                        <hr>
+                        <pre id="input-failed-pre"></pre>
+                    </div>
+
+                    <div class="additional-failed-details">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><strong>Run Status</strong></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Time (sec)</strong></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Memory (KB)</strong></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Web-Link (share)</strong></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p>CE</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="compile-failed-time"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="compile-failed-memory"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p id="share-link"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="pull-right"  style="padding:10px 10px 10px 10px;">
+                <button class="btn btn-info" id="save-code" >Save Code</button>
+                <button class="btn btn-primary" id="compile-and-run">Compile and Run</button>
+                <button id="download-editor-code" value="download-sc" class="btn  btn-group-sm" title="Download source code"><span class="glyphicon glyphicon-download-alt"></span></button>
+
+        </div>
+		<br>
+     		<hr>
+        </div>
+{#    Scripts#}
+
+    <script src="{%  static "src/ace.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{%  static "src/ext-statusbar.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src=" {% static "src/ext-language_tools.js" %}"></script>
+    <script src="{% static "js/FileSaver.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/ide.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    {# themes scripts #}
+    <script src="{% static "src/theme-twilight.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-chrome.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-solarized_dark.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-clouds.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-clouds_midnight.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-cobalt.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-crimson_editor.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-dawn.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-eclipse.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-idle_fingers.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-kr_theme.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-merbivore.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-merbivore_soft.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-mono_industrial.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-monokai.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-pastel_on_dark.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-textmate.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-tomorrow.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-vibrant_ink.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "src/theme-terminal.js" %}" type="text/javascript" charset="utf-8"></script>
+
+{# end of theme scripts #}
+<div>
+     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+</div>
+{% endblock %}

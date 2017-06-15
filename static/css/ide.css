@@ -1,0 +1,88 @@
+/*body css */
+body {
+    overflow: auto;
+}
+
+/* Top to Editor */
+.Top-to-editor {
+    margin: 0;
+    padding: 1%;
+    height: 45px;
+    background-color: rgb(228, 224, 244);
+}
+
+/* Editor */
+#editor {
+    margin: 0%;
+    height: 432px;
+}
+
+
+div.navbar-findcond { background: #fff; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
+div.navbar-findcond a { color: #f14444; }
+div.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
+div.navbar-findcond ul.navbar-nav a:hover,
+div.navbar-findcond ul.navbar-nav a:visited,
+div.navbar-findcond ul.navbar-nav a:focus,
+div.navbar-findcond ul.navbar-nav a:active { background: #fff; }
+div.navbar-findcond ul.navbar-nav a:hover { border-color: #f14444; }
+div.navbar-findcond li.divider { background: #ccc; }
+div.navbar-findcond button.navbar-toggle { background: #f14444; border-radius: 2px; }
+div.navbar-findcond button.navbar-toggle:hover { background: #999; }
+div.navbar-findcond button.navbar-toggle > span.icon-bar { background: #fff; }
+div.navbar-findcond ul.dropdown-menu { border: 0; background: #fff; border-radius: 4px; margin: 4px 0; box-shadow: 0 0 4px 0 #ccc; }
+div.navbar-findcond ul.dropdown-menu > li > a { color: #444; }
+div.navbar-findcond ul.dropdown-menu > li > a:hover { background: #f14444; color: #fff; }
+div.navbar-findcond span.badge { background: #f14444; font-weight: normal; font-size: 11px; margin: 0 4px; }
+div.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #fff; }
+
+
+/* bottom-to-editor*/
+
+/* Checkbox */
+#custom-input-checkbox {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+/* custom-input-container css*/
+.custom-input-container {
+    display: none;
+    margin-top: 10px;
+}
+
+hr {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 8px auto;
+    height: 0;
+    width: 100%;
+    max-height: 0;
+    font-size: 1px;
+    line-height: 0;
+    clear: both;
+    border: none;
+    border-top: 1px solid #aaaaaa;
+    border-bottom: 1px solid #ffffff;
+}
+
+/* css for when compilation is done successfully */
+.compile-done {
+    display: none;
+    margin-top: 6px;
+    padding: 1%;
+}
+
+/* css for when compilation is failed*/
+.compile-not-done {
+    display: none;
+    margin-top: 6px;
+    padding: 1%;
+}
+
+/* pre tag attribute */
+pre {
+    max-height: 450px;
+    overflow: auto;
+}
